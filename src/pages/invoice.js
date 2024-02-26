@@ -12,7 +12,7 @@ import { url } from '../../config/index'
 
 
 
-export default function DownloadTicket() {
+export default function Invoice() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const ticketId = searchParams.get('ticket')
@@ -24,7 +24,6 @@ export default function DownloadTicket() {
     const [flightPassenger, setFlightPassenger] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [ToatalBooking, setToatalBooking] = useState();
-    const [AddMarkup, setAddMarkup] = useState();
     const [TaxFarestatic, setTaxFarestatic] = useState();
 
     const handlePrint = () => {
@@ -58,7 +57,6 @@ export default function DownloadTicket() {
               setIsLoading(false)
               if (response !== null) {
                 setToatalBooking(response.booking.total_price)
-                setAddMarkup(response.booking.add_markup)
                 console.log(response)
                 setMyBookings(response.booking)
                 setBookingResponse(JSON.parse(response.booking.booking_response))
@@ -105,14 +103,7 @@ export default function DownloadTicket() {
 
   const a = contract!=null && contract.length > 0 ? contract[0].AirlineFare.TaxFare : contractOld.length > 0 && contractOld[0].AirlineFare.TaxFare;
 //  var a = 1;
-
-var addma = Number(AddMarkup);
-console.log("addmarkup" , addma)
-if(addma > 0){
-var b = addma;
-}else{
 var b = Number(ToatalBooking);
-};
 var c = a+b;
 
       
@@ -235,7 +226,7 @@ var c = a+b;
                         <tbody>
                             <tr>
                                 {/* <td>INR {contract!=null && contract.length > 0 ? contract[0].AirlineFare.BaseFare : contractOld.length > 0 && contractOld[0].AirlineFare.BaseFare} </td> */}
-                                <td>INR {b}</td>
+                                <td>INR {ToatalBooking}</td>
                                 <td>INR {contract!=null && contract.length > 0 ? contract[0].AirlineFare.TaxFare : contractOld.length > 0 && contractOld[0].AirlineFare.TaxFare} </td>
                                 {/* <td>NR {contract!=null && contract.length > 0 ? contract[0].AirlineFare.GrossFare : contractOld.length > 0 && contractOld[0].AirlineFare.GrossFare} </td> */}
                                 <td>{c}</td>

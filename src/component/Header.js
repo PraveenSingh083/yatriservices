@@ -67,12 +67,12 @@ export default function Header() {
               </li>
               <li>
                 <Link href="#!">
-                  <span>+91-8178020841</span>
+                  <span>+91- 9721647550</span>
                 </Link>
               </li>
               <li>
                 <Link href="#!">
-                  <span>support@serviceyatri.com</span>
+                  <span>Support@yatriservice.com</span>
                 </Link>
               </li>
             </ul>
@@ -90,7 +90,7 @@ export default function Header() {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span className="lang-name"> Hello, {userDetails.name}</span>
+                    <span className="lang-name"> Hello, {userDetails.agency_name}</span>
                   </button>
                   <div className="dropdown-menu language-dropdown-menu">
                     <Link className="dropdown-item" href="/UserDashboard">
@@ -226,11 +226,13 @@ export default function Header() {
                     <i className="bi bi-search" />
                   </Link>
                 </div>
+            {Object.keys(userDetails).length == 0 && (
                 <div className="option-item">
-                  <Link href="/becomevendor" className="btn  btn_navber">
+                  <Link href="/Register" className="btn  btn_navber">
                     Become a partner
                   </Link>
                 </div>
+            )}
               </div>
             </div>
           </nav>

@@ -105,3 +105,9 @@ a {
     color-scheme: dark;
   }
 }
+.table_common_area thead tr th {
+  border: none;
+  background: #fff;
+  padding: 15px 6px !important;
+  font-size: 11px !important;
+}

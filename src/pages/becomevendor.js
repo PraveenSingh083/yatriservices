@@ -1,136 +1,10 @@
-"use client";
+import Footer from '@/component/Footer'
+import Header from '@/component/Header'
 import React from 'react'
-import Header from '../../component/Header'
-import Footer from '../../component/Footer'
-
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import Link from 'next/link';
-import { useToasts } from 'react-toast-notifications';
-import LoadingSpinner from "../../component/Loader";
-import {url} from '../../../config/index'
-import '../../styles/Home.module.css';
-import '../../styles/globals.css';
-import '../../pages/_document';
-import '../../pages/_app';
-import Head from 'next/head';
-import { ToastProvider } from 'react-toast-notifications';
-
 
 export default function becomevendor() {
-
-   
-
-  //  const { addToast } = useToasts();
-  const router = useRouter()
-  const [email, setEmail] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [landline, setLandLine] = useState("");
-  const [agencyname, setAgencyName] = useState("");
-  const [address, setAddress] = useState("");
-  const [reenterpassword, setReEnterPassword] = useState("");
-  const [pan, setPan] =useState("");
-  const [adhar, setAdhar] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [file, setFile] = useState("");
-  const [adharcard, setAdharcard] = useState("");
-
-
-
-  async function registerUser() {
-  
-    if (name === '') {
-        addToast("Please enter your name", { appearance: 'error' });
-        return
-      }
-      if (email === '') {
-        addToast("Please enter your email", { appearance: 'error' });
-        return
-      }
-      if (mobile === '') {
-        addToast("Please enter your mobile", { appearance: 'error' });
-        return
-      }
-
-      if (password === '') {
-        addToast("Please enter your password", { appearance: 'error' });
-        return
-      }
-      
-
-      const lastmodifie = file.lastModified;
-      // console.log(lastmodifie);
-      // console.log(adharcard);
-      // setIsLoading(true)
-      let bodyFormData = new FormData();
-      bodyFormData.append("action", "user_register");
-      bodyFormData.append("name", name);
-      bodyFormData.append("email", email);
-      bodyFormData.append("lastname", lastname);
-      bodyFormData.append("landline", landline);
-      bodyFormData.append("agencyname", agencyname);
-      bodyFormData.append("address", address);
-      bodyFormData.append("reenterpassword", reenterpassword);
-      bodyFormData.append("file", file);
-      bodyFormData.append("adharcard", adharcard);
-      bodyFormData.append("lastmodifie", lastmodifie);
-      bodyFormData.append("adhar", adhar);
-      bodyFormData.append("mobile", mobile);
-      bodyFormData.append("password", password);
-
-   
-     
-      
-      const data = new FormData();
-      data.set('file',file);
-      data.set('lastmodifie',lastmodifie);
-      data.set('adharcard', adharcard);
-      let result = await fetch("api/upload",{
-          method:"POST",
-          body:data
-      });
-      result = await result.json();
-      console.log(result);
-      console.log(adharcard);
-      if(result.success){
-alert("pancard and adharcard uploaded successfully")
-      }
-      else{
-        alert("please upload pancard and adharcard its mendotry")
-      }
-          await fetch(`${url}api.php`, {
-            method: 'POST',
-            body: bodyFormData
-          }).then((response) => response.json()).then((response) => {
-            setIsLoading(false)
-          console.log(response);
-            if(response!==null){
-              if(response.status!==200){
-                addToast("API response : "+response.message, { appearance: 'error' });
-              }else{
-                addToast("API response : "+response.message, { appearance: 'success' });
-                router.push('/Login');
-              }
-            }
-            setIsLoading(false)
-          })
-
-          
-
-
-
-}
-
   return (
-    
     <>
-    
-     {isLoading ? (
-                <LoadingSpinner />
-            ) : (
     <>
   <Header />
   <div className="search-overlay">
@@ -335,8 +209,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
                         className="form-control bg_input"
                         placeholder="First name*"
                       />
@@ -346,8 +218,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={lastname}
-                        onChange={(e) => setLastName(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Last name*"
                       />
@@ -358,8 +228,6 @@ alert("pancard and adharcard uploaded successfully")
                       <input
                         type="text"
                         className="form-control bg_input"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email address (Optional)"
                       />
                     </div>
@@ -368,8 +236,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={mobile}
-                        onChange={(e) => setMobile(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Mobile number*"
                       />
@@ -379,8 +245,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={landline}
-                        onChange={(e) => setLandLine(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Landline Number"
                       />
@@ -390,8 +254,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={agencyname}
-                        onChange={(e) => setAgencyName(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Agency Name"
                       />
@@ -401,8 +263,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
                         className="form-control bg_input"
                         placeholder="address"
                       />
@@ -412,8 +272,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={password}
-                         onChange={(e) => setPassword(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Password"
                       />
@@ -423,8 +281,6 @@ alert("pancard and adharcard uploaded successfully")
                     <div className="form-group">
                       <input
                         type="text"
-                        value={reenterpassword}
-                        onChange={(e) => setReEnterPassword(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Reenter Password"
                       />
@@ -432,19 +288,17 @@ alert("pancard and adharcard uploaded successfully")
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                    <input 
-            type = "file"
-            name = "file"
-            onChange={(e)=>setFile(e.target.files?.[0])}
-            />
+                      <input
+                        type="text"
+                        className="form-control bg_input"
+                        placeholder="Pan No"
+                      />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
                       <input
                         type="text"
-                        value={adhar}
-                        onChange={(e) => setAdhar(e.target.value)}
                         className="form-control bg_input"
                         placeholder="Aadhar Number"
                       />
@@ -452,19 +306,17 @@ alert("pancard and adharcard uploaded successfully")
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                    <input 
-            type = "file"
-            name = "file"
-            onChange={(e)=>setFile(e.target.files?.[0])}
-            />
+                      <input
+                        type="file"
+                        className="form-control bg_input"
+                        placeholder=""
+                      />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
                       <input
                         type="file"
-                        name="adharcard"
-                        onChange={(e)=>setAdharcard(e.target.files?.[0])}
                         className="form-control bg_input"
                         placeholder=""
                       />
@@ -510,9 +362,12 @@ alert("pancard and adharcard uploaded successfully")
                   <a href="privacy-policy.html">Privacy policy</a>
                 </label>
               </div>
-              <button className="btn btn_theme btn_md"
-                                                            onClick={(e)=>{e.preventDefault(); e.stopPropagation();registerUser()}}
-                                                        >Register</button>
+              <a
+                href="booking-confirmation.html"
+                className="btn btn_theme btn_md"
+              >
+                Sign up
+              </a>
             </div>
           </div>
         </div>
@@ -561,7 +416,6 @@ alert("pancard and adharcard uploaded successfully")
   {/* Footer  */}
  <Footer />
 </>
-)}
 </>
   )
 }
